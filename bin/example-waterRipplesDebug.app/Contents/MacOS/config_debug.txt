@@ -1,0 +1,213 @@
+
+[System]
+
+screen_width = 1920
+screen_height = 1080
+
+# the background map image
+bg_map = map/my_map_blue2.png
+label_layer = map/maplabels.png
+
+
+# the data file path
+data_file = ./tracks/demo.json
+
+
+show_dashboard = 0
+
+is_buoyant_animation = 0
+
+showTimeline = 0
+showSeasonclock = 0
+
+showLegends = 1
+showMapLabels = 1
+showTaggedDate = 1
+
+showExtraDetect = 0
+    
+
+# land mask
+land_mask = ./map/landmask.csv
+
+[data]
+
+# all species in the data file
+all_species = SalmonShark,BlueWhale,ShortfinMakoShark,LeatherbackSeaTurtle,LaysanAlbatross,NorthernElephantSeal
+# all_species = ShortfinMakoShark
+
+# only selected species will be displayed
+selected_species = SalmonShark,BlueWhale,ShortfinMakoShark,LeatherbackSeaTurtle,LaysanAlbatross,NorthernElephantSeal
+# selected_species = ShortfinMakoShark
+
+min_track_day = 0
+max_gap  = 100
+
+
+[description]
+
+SalmonShark_title = Salmon Shark
+SalmonShark_desc = Salmon sharks range as far south as\n the Sea of Japan and Alaska during the\n annual salmon run.
+
+BlueWhale_title = Blue Whale
+BlueWhale_desc = Blue sharks are found off the coasts\nof every continent. Its greatest Pacific\nconcentrations occur between 20° and\n50° North but with strong seasonal fluctuations.
+
+
+ShortfinMakoShark_title = Mako Shark
+ShortfinMakoShark_desc = this is the description of Shortfin Mako Shark
+
+WhiteShark_title = White Shark
+WhiteShark_desc = this is the description of White Shark
+
+
+LeatherbackSeaTurtle_title = Sea Turtle
+LeatherbackSeaTurtle_desc = this is the description\nof Leatherback Sea Turtle
+
+LaysanAlbatross_title = Albatross
+LaysanAlbatross_desc = this is the \n description\rof Laysan Albatross
+
+
+NorthernElephantSeal_title = Elephant Seal
+NorthernElephantSeal_desc = this is the description\nof Northern Elephant Seal
+
+[speed]
+
+# 6 days per second
+display_speed = 5
+
+[boat]
+
+# the boat disc image
+disc_image = images/boat.png
+
+boat_expanding_time = 800
+
+boat_sonar_freq = 0.5
+
+# boat shape radius
+boat_puck_radius = 45
+
+# the range of the detecting area of the boat
+boat_detect_radius  = 170
+
+# the range of the extra detecting area of the boat
+extra_detect_radius = 300
+
+[RenderTrack]
+
+inner_path_width = 2.6
+inner_path_opacity = 255
+
+outter_path_width = 2.8
+outter_path_color = #cccccc
+outter_path_opacity = 130
+
+track_end_circle_radius = 3
+track_end_circle_line_width = 0.2
+
+tagged_date_font = font/babas.ttf
+tagged_date_font_size = 11
+tagged_date_font_color = #eeeeee
+
+SalmonShark = #D55202
+BlueWhale = #0D9CD0
+ShortfinMakoShark = #BDB043
+WhiteShark = #9C9C91
+LeatherbackSeaTurtle = #49BB2F
+LaysanAlbatross = #C5C8D2
+NorthernElephantSeal = #EB9C1E
+
+
+[RenderTrackParameters]
+
+trail_smoothness =  6
+
+# the proximity of the detecting radius of a touch
+touch_sensitivity_radius = 25
+
+fadeInTime = 600
+fadeOutTime = 5000
+
+buoyant_size_offset = 5
+buoyant_interval = 2500
+
+[icon]
+width  = 32
+height = 32
+detected_opacity = 110
+undetected_opacity = 0
+
+
+# the icons for each species
+[icon_file_path]
+
+BowTie = images/bow_tie.png
+Fail = images/fail.png
+
+SalmonShark = images/nina_v3/Salmon_Shark/salmon_shark_black.png
+SalmonShark_tagged = images/nina_v3/Salmon_Shark/salmon_shark_tracker.png
+SalmonShark_color = images/nina_v3/Salmon_Shark/salmon_shark_color.png
+
+
+BlueWhale = images/nina_v3/Blue_Whale/blue_whale_black.png
+BlueWhale_tagged = images/nina_v3/Blue_Whale/blue_whale_tracker.png
+BlueWhale_color = images/nina_v3/Blue_Whale/blue_whale_color.png
+
+
+ShortfinMakoShark = images/nina_v3/Mako_Shark/mako_shark_black.png
+ShortfinMakoShark_tagged = images/nina_v3/Mako_Shark/mako_shark_tracker.png
+ShortfinMakoShark_color = images/nina_v3/Mako_Shark/mako_shark_color.png
+
+
+WhiteShark = images/nina_v3/White_Shark/white_shark_black.png
+WhiteShark_tagged = images/nina_v3/White_Shark/white_shark_tracker.png
+WhiteShark_color = images/nina_v3/White_Shark/white_shark_color.png
+
+
+LeatherbackSeaTurtle = images/nina_v3/Leatherback_Sea_Turtle/leatherback_black.png
+LeatherbackSeaTurtle_tagged = images/nina_v3/Leatherback_Sea_Turtle/leatherback_tracker.png
+LeatherbackSeaTurtle_color = images/nina_v3/Leatherback_Sea_Turtle/leatherback_color.png
+
+
+LaysanAlbatross = images/nina_v3/Albatross/albatross_black.png
+LaysanAlbatross_tagged = images/nina_v3/Albatross/albatross_tracker.png
+LaysanAlbatross_color = images/nina_v3/Albatross/albatross_color.png
+
+
+NorthernElephantSeal = images/nina_v3/Elephant_Seal/elephant_seal_black.png
+NorthernElephantSeal_tagged = images/nina_v3/Elephant_Seal/elephant_seal_tracker.png
+NorthernElephantSeal_color = images/nina_v3/Elephant_Seal/elephant_seal_color.png
+
+
+[Legend]
+font = font/babas.ttf
+font_size = 12
+
+
+[Timeline]
+line_color = #eeeeee
+
+# the height of the tick on the timeline
+tick_height = 20
+
+font = font/babas.ttf
+max_font_size = 38
+
+
+[file_path]
+
+season_clock = images/season_clock/clock.png
+season_clock_arrow = images/season_clock/arrow.png
+
+
+[popout]
+
+fadeInTime = 500
+fadeOutTime = 500
+max_opacity = 150;
+
+title_font = font/babas.ttf
+title_font_size = 15
+
+desc_font = font/babas.ttf
+desc_font_size = 10
