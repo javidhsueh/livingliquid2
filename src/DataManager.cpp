@@ -13,6 +13,7 @@
 #include <cmath> 
 #include <algorithm>
 #include "ConfigLoader.h"
+#include "Logger.h"
 
 DataManager* DataManager::instance = 0;
 DataManager* DataManager::singleton(){
@@ -56,6 +57,7 @@ void DataManager::loadTrackData(){
                 std::string start_date = one_animal["start_date"].asString();
                 int track_days = one_animal["time_span"].asInt();
                 int gap_days = one_animal["total_gap"].asInt();
+                int end_day_idx = one_animal["end_index"].asInt();
                 int max_gap_days = one_animal["gap"].asInt();
                 
                 ofxJSONElement points = one_animal["points"];
@@ -74,7 +76,7 @@ void DataManager::loadTrackData(){
                 this->individual_tracks[id] = t_points;
                 id_list.push_back(id);
                 
-                RenderTrack* rt = new RenderTrack(*name, id, t_points, start_date, track_days, gap_days, max_gap_days);
+                RenderTrack* rt = new RenderTrack(*name, id, t_points, start_date, end_day_idx, track_days, gap_days, max_gap_days);
                 this->all_tracks.push_back(rt);
                 
             }
@@ -83,7 +85,7 @@ void DataManager::loadTrackData(){
         }
         
     }else{
-        ofLog(OF_LOG_FATAL_ERROR, "Unable to load track data.");
+        Logger::singleton()->log("Unable to load track data.");
     }
     
     // build selected tracks
@@ -128,12 +130,51 @@ std::vector<RenderTrack*> DataManager::getAllTracks(){
     return all_tracks;
 }
 
+std::vector<RenderTrack*> DataManager::getTracksBySpecies(std::string species_name){
+    std::vector<RenderTrack*> selected_tracks;
+    for(auto rt = this->all_tracks.begin(); rt != this->all_tracks.end(); ++rt){
+        std::string name = (*rt)->getSpeciesName();
+        if(name == species_name){
+            selected_tracks.push_back(*rt);
+        }
+    }
+    return selected_tracks;
+}
+
+void DataManager::setSelectedTracks(std::vector<std::string> id_list){
+    
+    for(auto t = all_tracks.begin(); t!= all_tracks.end(); t++){
+        if( std::find( id_list.begin(), id_list.end(), (*t)->getID()) != id_list.end() ){
+            (*t)->setSelected(true);
+        }else{
+            (*t)->setSelected(false);
+        }
+    }
+}
+
 std::vector<RenderTrack*> DataManager::getSelectedTracks(){
     std::vector<RenderTrack*> selected_tracks;
     for(auto t = all_tracks.begin(); t!= all_tracks.end(); t++){
         if( (*t)->selected()){
             selected_tracks.push_back(*t);
         }
+    }
+    return selected_tracks;
+}
+std::vector<std::string> DataManager::getSelectedTracksID(){
+    std::vector<std::string> selected_tracks;
+    for(auto t = all_tracks.begin(); t!= all_tracks.end(); t++){
+        if( (*t)->selected()){
+            selected_tracks.push_back((*t)->getID());
+        }
+    }
+    return selected_tracks;
+}
+
+std::vector<std::string> DataManager::getAllTracksID(){
+    std::vector<std::string> selected_tracks;
+    for(auto t = all_tracks.begin(); t!= all_tracks.end(); t++){
+        selected_tracks.push_back((*t)->getID());
     }
     return selected_tracks;
 }

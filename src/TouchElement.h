@@ -31,7 +31,7 @@ public:
     
     // getter, setter
     ofPoint getPosition()       {   return this->pos;   }
-    void setPosition(ofPoint p) {   this->pos = p;      }
+    virtual void setPosition(ofPoint p) {   this->pos = p;      }
     int getTID(){   return this->tid;   }
     
 protected:

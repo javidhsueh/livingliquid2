@@ -27,11 +27,18 @@ public:
     std::vector<std::string> getSelectedSpecies();
     
     
+    std::vector<RenderTrack*> getTracksBySpecies(std::string species_name);
+    
     std::vector<RenderTrack*> getAllTracks();
+    std::vector<std::string> getSelectedTracksID();
+    std::vector<std::string> getAllTracksID();
     
     std::vector<RenderTrack*> getSelectedTracks();
     
     RenderTrack* getIndividualTrack(std::string id);
+    
+    
+    void setSelectedTracks(std::vector<std::string>);
     
     void updateSelectedTracks();
     

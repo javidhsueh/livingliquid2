@@ -83,11 +83,11 @@ void AnimalPopout::update(){
         // draw desc
         ofSetColor(desc_color);
         std::string desc = this->desc;
-        //Pen::singleton()->getFont("Popout_desc")->drawString(desc, panel_origin.x+10, panel_origin.y+10+title_height+20);
-        Pen::singleton()->getFont("Popout_desc")->drawString("this is first line.\nThis is second line.\nThird.", panel_origin.x+10, panel_origin.y+10+title_height+20);
+        Pen::singleton()->getFont("Popout_desc")->drawString(" "+desc, panel_origin.x+10, panel_origin.y+10+title_height+20);
+//        Pen::singleton()->getFont("Popout_desc")->drawString("this is first line.\nThis is second line.\nThird.", panel_origin.x+10, panel_origin.y+10+title_height+20);
         
         // draw Icon
-        ofTexture* icon = ImageResources::singleton()->getImage(this->rt->getSpeciesName()+"_tagged");
+        ofTexture* icon = ImageResources::singleton()->getImage(this->rt->getSpeciesName()+"_color");
         ofPoint icon_pos(panel_origin.x+widget_width-icon->getWidth()/2, panel_origin.y+(widget_height-icon->getHeight())/2);
         ofSetColor(ofColor(255,255,255,this->current_opacity));
         icon->draw(icon_pos);

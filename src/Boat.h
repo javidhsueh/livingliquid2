@@ -37,6 +37,7 @@ public:
     
     void addAnimal(RenderTrack*);
     
+    void setPosition(ofPoint p);
     
     void toggleDetectExtraNearby();
     bool isWithinNearbyRange(int pointX, int pointY);

@@ -15,16 +15,25 @@
 #include "FingerTouch.h"
 #include <iostream>
 #include "Pen.h"
-
-
+#include <cstdlib>
+#include "Wave.h"
+#include "Logger.h"
 
 Map::Map(){
+    
     // load background map image
     if(!this->bg_map.loadImage(ConfigLoader::singleton()->Value("System", "bg_map")) ){
-        ofLog(OF_LOG_FATAL_ERROR, "Fail to load background map image.");
+        Logger::singleton()->log("Error: Fail to load background map image.");
     }
-    if(!this->label_layer.loadImage(ConfigLoader::singleton()->Value("System", "label_layer")) ){
-        ofLog(OF_LOG_FATAL_ERROR, "Fail to load background map image.");
+    // load layers images
+    if(!this->continent_label_layer.loadImage(ConfigLoader::singleton()->Value("System", "continent_label_layer")) ){
+        Logger::singleton()->log("Error: Fail to load continent label image.");
+    }
+    if(!this->site_label_layer.loadImage(ConfigLoader::singleton()->Value("System", "site_layer")) ){
+        Logger::singleton()->log("Error: Fail to load tagging site image.");
+    }
+    if(!this->pin_label_layer.loadImage(ConfigLoader::singleton()->Value("System", "pin_layer")) ){
+        Logger::singleton()->log("Error: Fail to load tagging site pins image.");
     }
     
     
@@ -57,8 +66,10 @@ Map::Map(){
     // information layer mode
     this->isDebug = false;
 
-    
-    this->isShowLabel = ofToBool( ConfigLoader::singleton()->Value("System", "showMapLabels") );
+    // turn on/off layers
+    this->isShowContinentLabel = ofToBool( ConfigLoader::singleton()->Value("System", "showContinentLabels") );
+    this->isShowSiteLabel = ofToBool( ConfigLoader::singleton()->Value("System", "showSiteLabels") );
+    this->isShowPinLabel = ofToBool( ConfigLoader::singleton()->Value("System", "showPinLabels") );
     
     // operating mode
     this->mouseMode = false;
@@ -80,7 +91,8 @@ Map::Map(){
     
     // setup the debug text font
     textfont.loadFont("font/Sansation_Light.ttf", 16);
-    
+ 
+    this->wave_freq = ofRandom(150, 400);
 }
 
 void Map::updateSelectedSpecies(){
@@ -104,7 +116,6 @@ void Map::update(){
             ofEllipse(p.x, p.y,3,3);
         boat->clearNearbyAnimal();
     }
-    
     rip.end();
     rip.update();
     
@@ -148,9 +159,11 @@ void Map::update(){
                 delete te;
                 
                 // replace it as a boat object
+                
                 Boat* b = new Boat(tid, p_position);
                 this->tuio_points[tid] = b;
                 this->boats[tid] = b;
+                Logger::singleton()->log("OBJ: create boat:"+ofToString(tid) +", at:"+ofToString(p_position));
                 break;
             }
         }
@@ -172,24 +185,74 @@ void Map::update(){
         (*track)->update(this->speed);
     }
     
-    // update popouts
-    AnimalPopoutPool::singleton()->update();
+    //update wave animation
+    
+    
+    // every XX frames, generate some random waves
+    if (ofGetFrameNum() % this->wave_freq == 0){
+        
+        //change frequency
+        this->wave_freq = ofRandom(150, 400);
+        
+        //select random tracks
+        int wave_count = 0;
+        std::vector<ofPoint> wave_pos;
+        for(auto track = this->tracks.begin(); track != this->tracks.end(); track++){
+            (*track)->resetDetectionStatus();
+            if( (*track)->isDetectable()){
+                wave_pos.push_back((*track)->getCurrentPosition());
+                wave_count++;
+                if(++wave_count == 10){
+                    break;
+                }
+            }
+        }
+        
+        int selected_wave_count = wave_pos.size() > 8? 8: wave_pos.size();
+        
+        std::random_shuffle ( wave_pos.begin(), wave_pos.end() );
+        for(int i = 0 ; i< ofRandom(selected_wave_count);i++){
+            ofPoint p = wave_pos[i];
+            if(p.x< 0 || p.x> 1920 || p.y<0 || p.y > 1080 || land_mask[int(p.x)][int(p.y)])
+                continue;
+            Wave* w = WavePool::singleton()->getAvailableWave();
+            if(w){
+                w->setPosition(p);
+                w->startPlay();
+            }
+        }
+    }
+    WavePool::singleton()->update();
 }
 
 void Map::draw(){
     
-    ofBackground(255,255,255);
-    ofSetColor(255,255,255,250);
+    ofBackground(255,255,255,255);
+    ofSetColor(255,255,255,255);
 
     ////////////////////////////////////////////////////////////////////////////
     
-    // this->bg_map.draw(0,0, ofGetWidth(), ofGetHeight()); // bg map image
+//    ofBackgroundGradient(ofColor::white,ofColor(255,255,200), OF_GRADIENT_CIRCULAR);
+    
     bounce.draw(0,0);
     
-    if(this->isShowLabel){
-        ofSetColor(255,255,255,80);
-        label_layer.draw(0,0);
+    if(this->isShowContinentLabel){
+        ofSetColor(255,255,255,255);
+        this->continent_label_layer.draw(0,0);
     }
+    
+    if(this->isShowSiteLabel){
+        ofSetColor(255,255,255,135);
+        this->site_label_layer.draw(0,0);
+    }
+    
+    if(this->isShowPinLabel){
+        ofSetColor(255,255,255,200);
+        this->pin_label_layer.draw(0,0);
+    }
+    
+    // show waves
+    WavePool::singleton()->draw();
     
     // draw tracks
     for(auto rt = this->tracks.begin(); rt != this->tracks.end(); ++rt){
@@ -209,7 +272,7 @@ void Map::draw(){
     }
     
     // update popouts
-    AnimalPopoutPool::singleton()->update();
+//    AnimalPopoutPool::singleton()->update();
     
     
     // draw timeline
@@ -218,16 +281,19 @@ void Map::draw(){
     this->clock->draw(this->speed);
     
     // draw current mode
-    if( this->touchMode ){
-        textfont.drawString("Touch mode", 20, 1060);
-    }else if( this->mouseMode ){
-        textfont.drawString("Mouse mode", 20, 1060);
-    }
+//    if( this->touchMode ){
+//        textfont.drawString("Touch mode", 20, 1060);
+//    }else if( this->mouseMode ){
+//        textfont.drawString("Mouse mode", 20, 1060);
+//    }
     
 //    textfont.drawString(ofToString(ofGetFrameRate()), 1890, 20);
 //    textfont.drawString(ofToString(ofGetFrameNum()), 20, 20);
 
+
+
 }
+
 
 void Map::mouseMove(int x, int y){
 //    if(!this->mouseMode)
@@ -343,6 +409,7 @@ void Map::tuioFingerAdded(int tid, ofPoint point){
     if(this->mouseMode)
         return;
     
+//    Logger::singleton()->log(OF_LOG_SILENT, "EVENT: create touch:"+ofToString(tid) +", at:"+ofToString(point));
     
     //touch to tag animals
     FingerTouch* p = new FingerTouch(tid, point);
@@ -369,6 +436,7 @@ void Map::tuioFingerAdded(int tid, ofPoint point){
                         if(boat->isWithinRange(point.x, point.y) > 0){
                             (*rt)->setTagged(this->current_day);
                             boat->addAnimal((*rt));
+                            Logger::singleton()->log("EVENT: boat:"+ofToString(tid) +", tag:"+(*rt)->getSpeciesName()+"("+(*rt)->getID()+")");
                             break;
                         }
                     }
@@ -397,6 +465,7 @@ void Map::tuioFingerRemoved(int tid, ofPoint point){
     if(this->mouseMode)
         return;
     
+//    Logger::singleton()->log("EVENT: remove touch:"+ofToString(tid) +", at:"+ofToString(point));
     auto el = this->tuio_points.find(tid);
     if(el != this->tuio_points.end()){
         delete el->second;
@@ -440,7 +509,7 @@ void Map::toggleMouseMode(){
 
     // if open, create new boat
     if(this->mouseMode){
-        this->mouseboat = new Boat(0, ofPoint(960,540));
+        this->mouseboat = new Boat(0, ofPoint(780,540));
         this->tuio_points[0] = this->mouseboat;
         this->boats[0] = this->mouseboat;
     }else{
@@ -485,8 +554,17 @@ void Map::toggleShowExtraDetect(){
     }
 }
 
-void Map::toggleLabelLayer(){
-    this->isShowLabel = !this->isShowLabel;
+void Map::toggleContinentLabelLayer(){
+    this->isShowContinentLabel = !this->isShowContinentLabel;
+}
+
+void Map::toggleSiteLabelLayer(){
+    this->isShowSiteLabel = !this->isShowSiteLabel;
+}
+
+void Map::togglePinLabelLayer(){
+    this->isShowPinLabel = !this->isShowPinLabel;
+    
 }
 
 void Map::updateFadeInTime(int t){

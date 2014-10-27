@@ -18,6 +18,8 @@ public:
     
     void log(std::string type, std::string msg);
     
+    void log(std::string msg);
+    
     void createNewLog();
     
 private:

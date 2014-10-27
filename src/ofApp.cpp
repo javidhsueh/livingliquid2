@@ -2,8 +2,8 @@
 #include "ConfigLoader.h"
 #include <string>
 #include "ofxMouseAutoHider.h"
-
-
+#include "WavePool.h"
+#include "Logger.h"
 //--------------------------------------------------------------
 void ofApp::setup(){
     
@@ -13,6 +13,7 @@ void ofApp::setup(){
     
     // create objects
     DataManager::singleton();
+    this->track_browser = new TrackBrowser();
     this->map = new Map();
     this->info = new InfoTab();
     this->help = new HelpPanel();
@@ -20,6 +21,7 @@ void ofApp::setup(){
     this->legend = new Legend();
     
     ofAddListener(this->dashboard->gui->newGUIEvent,this,&ofApp::guiEvent);
+    ofAddListener(this->track_browser->gui->newGUIEvent,this,&ofApp::guiEvent);
     
     
     // GUI listener
@@ -39,7 +41,7 @@ void ofApp::setup(){
     
     
     ////////////////////////////////////////////////////////////
-    //ofSetFullscreen(this->isFullscreen);
+//    ofSetFullscreen(this->isFullscreen);
     ofBackground(255,255,255);
     ofSetVerticalSync(true);
     ofEnableAntiAliasing();
@@ -73,7 +75,7 @@ void ofApp::draw(){
 void ofApp::guiEvent(ofxUIEventArgs &e)
 {
 	string name = e.widget->getName();
-//    ofLog(OF_LOG_NOTICE, name);
+//    Logger::singleton()->log(name);
     
 	int kind = e.widget->getKind();
     
@@ -81,40 +83,110 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     
     if(std::find(all_species.begin(), all_species.end(), name) != all_species.end()){
         DataManager::singleton()->toggleSpecies(name);
+        std::vector<std::string> selected_species = DataManager::singleton()->getSelectedSpecies();
+        
+        if(std::find(selected_species.begin(), selected_species.end(), name) != selected_species.end()){
+            this->track_browser->setSpeciesTrackes(name, true);
+            this->dashboard->species_toggle_map[name]->setValue(true);
+        }else{
+            this->track_browser->setSpeciesTrackes(name, false);
+            this->dashboard->species_toggle_map[name]->setValue(false);
+        }
+            
+        this->map->updateSelectedSpecies();
+    }
+    
+    std::vector<std::string> selected_tracks = DataManager::singleton()->getAllTracksID();
+    if(std::find(selected_tracks.begin(), selected_tracks.end(), name) != selected_tracks.end()){
+//        bool old_val = this->track_browser->id_toggle_map[name]->getValue();
+//        this->track_browser->id_toggle_map[name]->toggleValue();
+        DataManager::singleton()->setSelectedTracks(this->track_browser->getSelectedTracks());
+        this->map->updateSelectedSpecies();
+    }
+    
+    
+    if(name == "Select all"){
+        this->track_browser->selectAllTracks();
+        DataManager::singleton()->setSelectedTracks(this->track_browser->getSelectedTracks());
+        std::vector<std::string> selected_species = DataManager::singleton()->getAllSpecies();
+        for(auto s = selected_species.begin(); s != selected_species.end(); s++){
+            std::string species_name = *s;
+            this->dashboard->species_toggle_map[species_name]->setValue(true);
+        }
+        this->map->updateSelectedSpecies();
+    }
+    if(name == "Unselect all"){
+        this->track_browser->selectAllTracks();
+        DataManager::singleton()->setSelectedTracks(this->track_browser->getSelectedTracks());
+        std::vector<std::string> selected_species = DataManager::singleton()->getAllSpecies();
+        for(auto s = selected_species.begin(); s != selected_species.end(); s++){
+            std::string species_name = *s;
+            this->dashboard->species_toggle_map[species_name]->setValue(false);
+        }
         this->map->updateSelectedSpecies();
     }
 
-    if(name == "Show all tracks"){
+    if(name == "Debug: Show all tracks"){
         this->map->toggleDebugMode();
+        Logger::singleton()->log("UI: Toggle all tracks");
     }
+    
     if(name == "Show Timeline"){
         this->dashboard->toggleTimeline();
         this->map->toggleTimeline();
+        Logger::singleton()->log("UI: Toggle timeline");
     }
     
     if(name == "Show Season Clock"){
         this->dashboard->toggleSeasonClock();
         this->map->toggleClock();
+        Logger::singleton()->log("UI: Toggle Showing Season Clock");
     }
     
-    if(name == "Show Legends"){
+    if(name == "Show Species Legends"){
         this->dashboard->toggleLegends();
         this->legend->toggle();
+        Logger::singleton()->log("UI: Toggle Showing Species Legends");
     }
     
-    if(name == "Show Map Labels"){
-        this->dashboard->toggleMapLabels();
-        this->map->toggleLabelLayer();
+    // map layers:
+    //"Continent Labels", "Tagging Site Labels", "Tagging Site Pins"
+    if(name == "Continent Labels"){
+        this->dashboard->toggleContinentLabels();
+        this->map->toggleContinentLabelLayer();
+        Logger::singleton()->log("UI: Toggle Showing Continent Labels");
     }
+    
+    if(name == "Tagging Site Labels"){
+        this->dashboard->toggleSiteLabels();
+        this->map->toggleSiteLabelLayer();
+        Logger::singleton()->log("UI: Toggle Tagging Showing Site Labels");
+    }
+    
+    if(name == "Tagging Site Pins"){
+        this->dashboard->togglePinLabels();
+        this->map->togglePinLabelLayer();
+        Logger::singleton()->log("UI: Toggle Tagging Showing Site Pins");
+    }
+    
+    ///////////////////////////////////////
     
     if(name == "Show Tagged Date"){
         this->dashboard->toggleTaggedDate();
         this->map->toggleShowTaggedDate();
+        Logger::singleton()->log("UI: Toggle Tagged Showing Date");
     }
     
     if(name == "Nearby animal hint"){
         this->dashboard->toggleExtraDetect();
         this->map->toggleShowExtraDetect();
+        Logger::singleton()->log("UI: Toggle Nearby Animal Hint");
+    }
+    
+    if(name == "Show Wave"){
+        this->dashboard->toggleWave();
+        WavePool::singleton()->toggelVisibility();
+        Logger::singleton()->log("UI: Toggle Wave Animation");
     }
     
     
@@ -122,29 +194,35 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
     if(name == "None"){
         this->dashboard->toggleOrientationMode(NONE);
         this->map->setIconOrientationMode(NONE);
+        Logger::singleton()->log("UI: Icon Orientation: None");
     }
     if(name == "Rotate") {
         this->dashboard->toggleOrientationMode(ROTATE);
         this->map->setIconOrientationMode(ROTATE);
+        Logger::singleton()->log("UI: Icon Orientation: Rotate");
     }
     if(name == "Flip"){
         this->dashboard->toggleOrientationMode(FLIP);
         this->map->setIconOrientationMode(FLIP);
+        Logger::singleton()->log("UI: Icon Orientation: Flip");
     }
     
     if(name == "Buoyant animation"){
         this->dashboard->toggleBuoyantAnimation();
         this->map->toggleBuoyantAnimation();
+        Logger::singleton()->log("UI: Icon Orientation: Buoyant");
     }
     
     if(name == "Fade-In Time"){
         int fadeInTime = int(dashboard->fadeInTime);
         this->map->updateFadeInTime(fadeInTime);
+        Logger::singleton()->log("UI: Fade-In Time:"+ofToString(fadeInTime));
     }
     
     if(name == "Fade-Out Time"){
         int fadeOutTime = int(dashboard->fadeOutTime);
         this->map->updateFadeOutTime(fadeOutTime);
+        Logger::singleton()->log("UI: Fade-Out Time:"+ofToString(fadeOutTime));
     }
         
     /////////////////// filter //////////////////////////////
@@ -152,6 +230,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
         float new_min_track_days = int(dashboard->min_track_days);
         DataManager::singleton()->setMinTrackDays(new_min_track_days);
         this->map->updateSelectedSpecies();
+        Logger::singleton()->log("UI: Min Total Track Days:"+ofToString(new_min_track_days));
         
     }
     
@@ -159,11 +238,13 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
         float max_gap = int(dashboard->max_gap);
         DataManager::singleton()->setMaxGap(max_gap);
         this->map->updateSelectedSpecies();
+        Logger::singleton()->log("UI: Max Gap:"+ofToString(max_gap));
     }
     
     if(name == "Display Speed"){
         float speed = int(dashboard->speed);
         this->map->setSpeed(speed);
+        Logger::singleton()->log("UI: Display Speed:"+ofToString(speed));
         
     }
     
@@ -178,11 +259,15 @@ void ofApp::exit()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
-//    ofLog(OF_LOG_NOTICE, ofToString(key));
+//    Logger::singleton()->log(ofToString(key));
     
     if(key == 'd'){
 
         this->dashboard->toggle();
+        
+    }else if(key == 'b'){
+        
+        this->track_browser->toggle();
         
     }else if(key == 'i'){
         

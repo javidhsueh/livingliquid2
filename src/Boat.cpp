@@ -12,7 +12,7 @@
 #include "ofMain.h"
 #include "ofUtils.h"
 #include <math.h>
-
+#include "Logger.h"
 #include "ImageResources.h"
 
 
@@ -34,7 +34,7 @@ Boat::Boat(int tid, ofPoint p)
     
     // load images
     if(!this->img.loadImage(ConfigLoader::singleton()->Value("boat", "disc_image")) ){
-        ofLog(OF_LOG_ERROR, "Fail to load boat image.");
+        Logger::singleton()->log("Error: Fail to load boat image.");
         this->img.loadImage(ConfigLoader::singleton()->Value("icon_file_path", "Fail")); // load a default image
     }
     
@@ -90,8 +90,6 @@ void Boat::draw(){
             }
         }
         
-        
-        
         return;
     }
 
@@ -114,6 +112,9 @@ void Boat::draw(){
         }
     }
     
+    // debug only
+//    ofSetColor(255,130,0);
+//    ofCircle(this->pos.x, this->pos.y, this->detect_radius);
     
     if(this->showDetectRange){
         ofSetColor(255,0,0, 120);
@@ -208,5 +209,13 @@ void Boat::addNearbyAnimal(RenderTrack* rt){
 
 void Boat::clearNearbyAnimal(){
     this->nearby_animals.clear();
+}
+
+void Boat::setPosition(ofPoint p){
+    
+    if( abs(p.x - this->getPosition().x) > 1 || abs(p.y - this->getPosition().y) > 1)
+        Logger::singleton()->log("EVENT: boat:"+ofToString(tid) +", moves to:"+ofToString(p));
+
+    TouchElement::setPosition(p);
 }
 

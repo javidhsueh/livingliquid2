@@ -12,6 +12,7 @@
 
 #include <vector>
 #include <map>
+#include "Logger.h"
 
 ImageResources* ImageResources::instance=0;
 ImageResources* ImageResources::singleton(){
@@ -33,7 +34,7 @@ ImageResources::ImageResources() {
     std::vector<std::string> all_species = DataManager::singleton()->getAllSpecies();
     for(auto species = all_species.begin(); species!=all_species.end(); species++){
         file_list.push_back(std::pair<std::string, std::string>("icon_file_path", *species) );
-        file_list.push_back(std::pair<std::string, std::string>("icon_file_path", *species+"_tagged") );
+//        file_list.push_back(std::pair<std::string, std::string>("icon_file_path", *species+"_tagged") );
         file_list.push_back(std::pair<std::string, std::string>("icon_file_path", *species+"_color") );
     }
     
@@ -41,15 +42,17 @@ ImageResources::ImageResources() {
     file_list.push_back(std::pair<std::string, std::string>("icon_file_path", "Fail") );
 
     //bg_map, label_layer
-    file_list.push_back(std::pair<std::string, std::string>("System", "bg_map") );
-    file_list.push_back(std::pair<std::string, std::string>("System", "label_layer") );
+//    file_list.push_back(std::pair<std::string, std::string>("System", "bg_map") );
+//    file_list.push_back(std::pair<std::string, std::string>("System", "continent_label_layer") );
+//    file_list.push_back(std::pair<std::string, std::string>("System", "site_layer") );
+//    file_list.push_back(std::pair<std::string, std::string>("System", "pin_layer") );
     
     //boat
     file_list.push_back(std::pair<std::string, std::string>("boat", "disc_image") );
     
     //season_clock, season_clock_arrow
-    file_list.push_back(std::pair<std::string, std::string>("file_path", "season_clock") );
-    file_list.push_back(std::pair<std::string, std::string>("file_path", "season_clock_arrow") );
+//    file_list.push_back(std::pair<std::string, std::string>("file_path", "season_clock") );
+//    file_list.push_back(std::pair<std::string, std::string>("file_path", "season_clock_arrow") );
     
     
     for(auto i = file_list.begin(); i != file_list.end(); i++){
@@ -57,7 +60,7 @@ ImageResources::ImageResources() {
         std::string key = (*i).second;
         std::string full_file_path = ConfigLoader::singleton()->Value(section, key);
         if(!loader.loadImage(full_file_path)){
-            ofLog(OF_LOG_ERROR, "Fail to load icon image for RenderTrack.");
+            Logger::singleton()->log("Fail to load image:"+full_file_path);
             loader.loadImage(ConfigLoader::singleton()->Value("icon_file_path", "Fail")); // load a default image
         }
         this->images[key] = new ofTexture();

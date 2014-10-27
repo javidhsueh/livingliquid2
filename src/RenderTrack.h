@@ -17,6 +17,7 @@
 #include "FingerTouch.h"
 #include "AnimalPopout.h"
 #include "AnimalPopoutPool.h"
+#include "Tag.h"
 
 
 enum AnimalStatus { DEBUGGING, INVISIBLE, DETECTABLE, DETECTED, TAGGED_FADE_IN, TAGGED_STABLE, TAGGED_FADE_OUT, SHOW_INFO };
@@ -31,13 +32,14 @@ class Boat;
 
 class RenderTrack{
 public:
-    RenderTrack(std::string species, std::string id, std::vector<TrackPoint*> point, std::string start_date, int trackdays, int gap_days, int max_gap);
+    RenderTrack(std::string species, std::string id, std::vector<TrackPoint*> point, std::string start_date, int end_day_idx, int trackdays, int gap_days, int max_gap);
     
     std::string getSpeciesName(){   return species; }
     std::string getID(){    return id;  }
     int getTrackDays(){     return track_days;  }
     int getMaxGap(){    return max_gap;     }
     
+    int getCurrentStatus();
     ofPoint getCurrentPosition();
     ofColor getColor();
     int getOpacity();
@@ -58,9 +60,7 @@ public:
     void setSelected(bool flag){    this->isSelected = flag;    }
     bool selected(){                return this->isSelected;    }
     
-//    void setShowInfo(bool flag){    this->isShowInfo = flag;    }
     void toggleShowInfo();
-    
     
     void setBuoyantAnimation(bool flag){    this->buoyant_animation = flag;                     }
     void toggleBuoyantAnimation(){          this->buoyant_animation = !this->buoyant_animation; }
@@ -124,6 +124,10 @@ private:
     // icon image
     ofImage icon;
     ofImage tagged_icon;
+
+    // ofImage tag;
+    Tag* tag;
+    
     int icon_width, icon_height;
     int detected_opacity;
     
@@ -179,6 +183,7 @@ private:
     ofPoint tagged_point;
     ofPoint current_point;
     ofPoint lastPoint;
+    ofPoint end_point; // the tag falling off
     
     float lastAngle;
     

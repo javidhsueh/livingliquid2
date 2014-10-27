@@ -11,6 +11,7 @@
 #include "Dashboard.h"
 #include "Legend.h"
 #include "ofxTuio.h"
+#include "TrackBrowser.h"
 
 class Legend;
 
@@ -52,6 +53,7 @@ private:
 
     bool isFullscreen;
     
+    TrackBrowser* track_browser;
     InfoTab* info;
     HelpPanel* help;
     Dashboard* dashboard;

@@ -428,7 +428,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
-            endingLineNumber = "113">
+            endingLineNumber = "113"
+            landmarkName = "RenderTrack::setVisibilityStatus(int status)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -442,7 +444,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "114"
-            endingLineNumber = "114">
+            endingLineNumber = "114"
+            landmarkName = "RenderTrack::setVisibilityStatus(int status)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -504,9 +508,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "RenderTrack::isDetected()"
-            landmarkType = "5">
+            endingLineNumber = "175">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -567,7 +569,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "536"
             endingLineNumber = "536"
-            landmarkName = "RenderTrack::reset()"
+            landmarkName = "RenderTrack::testTouch(int x, int y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -582,7 +584,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "539"
-            endingLineNumber = "539">
+            endingLineNumber = "539"
+            landmarkName = "RenderTrack::testTouch(int x, int y)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -596,7 +600,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "538"
-            endingLineNumber = "538">
+            endingLineNumber = "538"
+            landmarkName = "RenderTrack::testTouch(int x, int y)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -627,7 +633,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "454"
             endingLineNumber = "454"
-            landmarkName = "RenderTrack::getCurrentPosition()"
+            landmarkName = "RenderTrack::drawIcon(int speed)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -643,7 +649,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "455"
             endingLineNumber = "455"
-            landmarkName = "RenderTrack::getCurrentPosition()"
+            landmarkName = "RenderTrack::drawIcon(int speed)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -658,7 +664,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "461"
-            endingLineNumber = "461">
+            endingLineNumber = "461"
+            landmarkName = "RenderTrack::drawIcon(int speed)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -673,7 +681,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "463"
             endingLineNumber = "463"
-            landmarkName = "RenderTrack::getOpacity()"
+            landmarkName = "RenderTrack::drawIcon(int speed)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -705,7 +713,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "380"
             endingLineNumber = "380"
-            landmarkName = "RenderTrack::drawIcon(int speed)"
+            landmarkName = "RenderTrack::draw(int speed)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -737,7 +745,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "527"
             endingLineNumber = "527"
-            landmarkName = "RenderTrack::toggleShowInfo()"
+            landmarkName = "RenderTrack::testTouch(int x, int y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -784,9 +792,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
-            endingLineNumber = "137"
-            landmarkName = "RenderTrack::toggleDebugMode()"
-            landmarkType = "5">
+            endingLineNumber = "137">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -895,7 +901,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "511"
             endingLineNumber = "511"
-            landmarkName = "RenderTrack::testTouch(int x, int y)"
+            landmarkName = "RenderTrack::detectNearbyBoat(Boat* b, int time)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -911,7 +917,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "504"
             endingLineNumber = "504"
-            landmarkName = "RenderTrack::testTouch(int x, int y)"
+            landmarkName = "RenderTrack::resetDetectionStatus()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -943,7 +949,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "525"
             endingLineNumber = "525"
-            landmarkName = "RenderTrack::toggleShowInfo()"
+            landmarkName = "RenderTrack::testTouch(int x, int y)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -959,7 +965,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "521"
             endingLineNumber = "521"
-            landmarkName = "RenderTrack::toggleShowInfo()"
+            landmarkName = "RenderTrack::detectNearbyBoat(Boat* b, int time)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -975,7 +981,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "512"
             endingLineNumber = "512"
-            landmarkName = "RenderTrack::testTouch(int x, int y)"
+            landmarkName = "RenderTrack::detectNearbyBoat(Boat* b, int time)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1102,9 +1108,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "RenderTrack::RenderTrack(std::string species, std::string id, std::vector&lt;TrackPoint*&gt; points, std::string start_date, int track_days, int gap_days, int max_gap )"
-            landmarkType = "5">
+            endingLineNumber = "111">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

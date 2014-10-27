@@ -13,9 +13,9 @@
 #include "Util.h"
 #include <math.h>
 #include "Pen.h"
+#include "Logger.h"
 
-
-RenderTrack::RenderTrack(std::string species, std::string id, std::vector<TrackPoint*> points, std::string start_date, int track_days, int gap_days, int max_gap ){
+RenderTrack::RenderTrack(std::string species, std::string id, std::vector<TrackPoint*> points, std::string start_date, int end_day_idx, int track_days, int gap_days, int max_gap ){
 
     // copy data
     this->species = species;
@@ -33,11 +33,11 @@ RenderTrack::RenderTrack(std::string species, std::string id, std::vector<TrackP
     
     // load icon image
     if(!this->icon.loadImage(ConfigLoader::singleton()->Value("icon_file_path", species))){
-        ofLog(OF_LOG_ERROR, "Fail to load icon image for RenderTrack.");
+        Logger::singleton()->log("Error: Fail to load icon image for RenderTrack.");
         this->icon.loadImage(ConfigLoader::singleton()->Value("icon_file_path", "Fail")); // load a default image
     }
-    if(!this->tagged_icon.loadImage(ConfigLoader::singleton()->Value("icon_file_path", species+"_tagged"))){
-        ofLog(OF_LOG_ERROR, "Fail to load icon image for RenderTrack.");
+    if(!this->tagged_icon.loadImage(ConfigLoader::singleton()->Value("icon_file_path", species+"_color"))){
+        Logger::singleton()->log("Error: Fail to load icon image for RenderTrack.");
         this->tagged_icon.loadImage(ConfigLoader::singleton()->Value("icon_file_path", "Fail")); // load a default image
     }
     
@@ -86,7 +86,7 @@ RenderTrack::RenderTrack(std::string species, std::string id, std::vector<TrackP
         int time = (*p)->time;//+this->start_date_idx;
         this->points[time] = *p;
     }
-    this->end_date_idx = this->start_date_idx + int(this->points.size());
+    this->end_date_idx = this->points.size()-20;
     this->cycle = ceil(this->points.size()/365.0)*365;
     
     // build the path first
@@ -98,22 +98,18 @@ RenderTrack::RenderTrack(std::string species, std::string id, std::vector<TrackP
     this->pathline = this->pathline.getSmoothed(this->path_smoothness);
     
     this->faceDirection = FACE_RIGHT;
-//    this->prevFaceDirection = this->faceDirection;
-//
-//    ofPoint first_pos = pathline.getPointAtIndexInterpolated(0);
-//    ofPoint second_pos = pathline.getPointAtIndexInterpolated(1);
-//    if(first_pos.x - second_pos.x > 0.0000 ){
-//        this->faceDirection = FACE_LEFT;
-//        this->icon.mirror(false, true);
-//        this->tagged_icon.mirror(false, true);
-//    }else{
-//        this->faceDirection = FACE_RIGHT;
-//    }
+    
+    this->end_point = this->pathline.getPointAtIndexInterpolated(this->end_date_idx);
+    
+    this->tag = new Tag(species);
+//    this->tag->buildPath(this->end_point);
+    
 }
 
 void RenderTrack::setVisibilityStatus(int status){
     this->prev_visibility_status = this->visibility_status;
     this->visibility_status = status;
+    this->tag->setStatus(status);
     
     if(this->prev_visibility_status == SHOW_INFO && this->visibility_status == TAGGED_STABLE && this->isPlaying == false){
         this->visibility_status = TAGGED_FADE_OUT;
@@ -201,7 +197,7 @@ void RenderTrack::update(int speed){
     int temp_current_date_idx = ((this->current_frame/speed) - this->start_date_idx) % this->cycle;
     
     // update loop control
-    if(temp_current_date_idx > 0 && temp_current_date_idx < this->points.size() ){
+    if(temp_current_date_idx > 0 && temp_current_date_idx < this->end_date_idx ){
         this->isPlaying = true;
     }
     else{
@@ -226,10 +222,15 @@ void RenderTrack::update(int speed){
         return;
     }
     
-    
     if(!this->isPlaying && this->visibility_status == TAGGED_STABLE){
+        
+        this->tag->setCurrentPosition(this->current_point);
+        this->tag->startAnimation();
+//        ofLog(OF_LOG_NOTICE, "now starts to fade out at point: "+ofToString(this->current_point));
+        
         this->setVisibilityStatus(TAGGED_FADE_OUT);
         this->fadeOut();
+        
     }
     
     // Javid: dirty code
@@ -264,14 +265,6 @@ void RenderTrack::update(int speed){
             
         }
         
-//        this->prevFaceDirection = this->faceDirection;
-//        float angleRad = atan2(lastPoint.y - current_point.y, lastPoint.x - current_point.x);
-//        if(lastPoint.x - current_point.x > 0.0000 ){
-//            this->faceDirection = FACE_LEFT;
-//        }else{
-//            this->faceDirection = FACE_RIGHT;
-//        }
-//        lastAngle = (angleRad * 180 / PI) + 180;
     }
     
     // update color , fade in/out or still
@@ -286,6 +279,16 @@ void RenderTrack::update(int speed){
     }
     else if(this->visibility_status == TAGGED_FADE_OUT){
         this->current_opacity = this->inner_path_opacity - Util::interpolate(ofGetElapsedTimeMillis(), this->fadeStartTime, this->fadeStartTime+this->fadeOutTime, this->inner_path_opacity);
+        
+        int offset = this->current_frame % speed;
+        float interpolated_idx = (current_date_idx)+(1.0*offset/speed);
+        this->current_point = pathline.getPointAtIndexInterpolated(interpolated_idx);
+        
+//        ofSetColor(255, 0, 0);
+//        ofFill();
+//        ofCircle(this->current_point, 15);
+
+        
         if(this->current_opacity <= 0){
             this->current_opacity = 0;
             this->setVisibilityStatus(INVISIBLE);
@@ -306,10 +309,14 @@ void RenderTrack::draw(int speed){
     
     if(this->visibility_status == DEBUGGING){ // show the whole trajectory
         ofSetLineWidth(3);
-        ofSetColor(70,70,70, 70);
+        ofSetColor(70,70,70, 100);
         pathline.draw();
         return;
     }
+    
+//    ofSetLineWidth(3);
+//    ofSetColor(70,70,70, 105);
+//    pathline.draw();
     
     if(this->visibility_status == TAGGED_STABLE   ||
        this->visibility_status == TAGGED_FADE_IN  ||
@@ -329,10 +336,13 @@ void RenderTrack::draw(int speed){
             line.addVertex(this->pathline.getPointAtIndexInterpolated(point_idx));
             point_idx++;
         }
-        line.addVertex(this->current_point);
-        line = line.getSmoothed(this->path_smoothness);
-        line.insertVertex(this->tagged_point, 0);
-        line.addVertex(this->current_point);
+        
+        if(this->visibility_status != TAGGED_FADE_OUT){
+            line.addVertex(this->current_point);
+            line = line.getSmoothed(this->path_smoothness);
+            line.insertVertex(this->tagged_point, 0);
+            line.addVertex(this->current_point);
+        }
         
         // draw outter line
         if(this->visibility_status == SHOW_INFO){
@@ -349,13 +359,14 @@ void RenderTrack::draw(int speed){
         
         // draw tagging point : inner circle
         ofPoint first_tag_point = line.getPointAtLength(0);
+        ofFill();
         ofCircle(first_tag_point, this->track_end_circle_radius);
         
         // draw tagging point: outter cicrcle
-        ofSetLineWidth(this->track_end_circle_line_width);
-        ofSetColor(this->outter_path_color, this->current_opacity);
-        ofNoFill();
-        ofCircle(first_tag_point, this->track_end_circle_radius);
+//        ofSetLineWidth(this->track_end_circle_line_width);
+//        ofSetColor(this->outter_path_color, this->current_opacity);
+//        ofNoFill();
+//        ofCircle(first_tag_point, this->track_end_circle_radius);
         
         // draw the tagged time
         if(this->show_tagged_date){
@@ -372,6 +383,8 @@ void RenderTrack::drawIcon(int speed){
         return;
     
     if(this->visibility_status == DEBUGGING){
+        ofSetColor(255,255,255,255);
+        ofNoFill();
         this->icon.draw(this->current_point.x-this->icon_width/2, this->current_point.y-this->icon_height/2, this->icon_width, this->icon_height);
         return;
     }
@@ -410,6 +423,11 @@ void RenderTrack::drawIcon(int speed){
         ofSetColor(255, 255, 255, this->current_opacity);
         ofFill();
         
+        if(this->visibility_status == TAGGED_FADE_OUT){
+            ofSetColor(180, 180, 180, this->current_opacity);
+            ofFill();
+        }
+        
         if(this->orientationMode == ROTATE){
             ofPushMatrix();
                 ofTranslate(this->current_point.x, this->current_point.y, 0);//move pivot to centre
@@ -429,6 +447,7 @@ void RenderTrack::drawIcon(int speed){
                 this->icon.mirror(false, true);
                 this->tagged_icon.mirror(false, true);
                 this->faceDirection = this->nextFaceDirection;
+                this->tag->flipDirection(this->faceDirection);
             }
             if(this->visibility_status == DETECTED){
                 this->icon.draw(this->current_point.x-new_icon_width/2.0, this->current_point.y-new_icon_height/2.0, new_icon_width, new_icon_height);
@@ -445,6 +464,9 @@ void RenderTrack::drawIcon(int speed){
             }
 
         }
+        
+        this->tag->setCurrentPosition(this->current_point);
+        this->tag->update();
 
     }
     
@@ -460,6 +482,10 @@ ofColor RenderTrack::getColor(){
 
 int RenderTrack::getOpacity(){
     return this->current_opacity;
+}
+
+int RenderTrack::getCurrentStatus(){
+    return this->visibility_status;
 }
 
 bool RenderTrack::detectExtraDistancebyBoat(Boat* b, int day){
@@ -516,13 +542,16 @@ bool RenderTrack::testTouch(int x, int y){
 }
 
 void RenderTrack::toggleShowInfo(){
+    return; // turn off for evaluation
     
     if(this->visibility_status == SHOW_INFO){
         AnimalPopoutPool::singleton()->releasePopout(this->popout);
         this->setVisibilityStatus(TAGGED_STABLE);
+        Logger::singleton()->log("EVENT: close popout: animal:"+this->species+", id:"+this->id+", at:"+ofToString(this->current_point));
     }else{
         this->popout = AnimalPopoutPool::singleton()->getAvailablePopout(this);
         this->setVisibilityStatus(SHOW_INFO);
+        Logger::singleton()->log( "EVENT: open popout: animal:"+this->species+", id:"+this->id+", at:"+ofToString(this->current_point));
     }
 }
 
@@ -532,5 +561,4 @@ void RenderTrack::reset(){
     this->isPlaying = false;
     this->tagged_day_idx = -1;
     this->visibility_status == INVISIBLE;
-        
 }

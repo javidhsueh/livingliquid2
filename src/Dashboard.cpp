@@ -22,7 +22,7 @@ Dashboard::Dashboard(){
     gui->addMinimalSlider("Display Speed", 0, 50, &this->speed);
     
     gui->addSpacer();
-    gui->addToggle( "Show all tracks", false);
+    gui->addToggle( "Debug: Show all tracks", false);
     //gui->addToggle( "Show SST", false);
     
     
@@ -33,16 +33,40 @@ Dashboard::Dashboard(){
     this->seasonclock_toggle = gui->addToggle("Show Season Clock", this->showSeasonclock);
     
     
-    this->showLegends = ofToBool(ConfigLoader::singleton()->Value("System", "showLegends"));
-    this->legends_toggle = gui->addToggle("Show Legends", this->showLegends);
+    this->showLegends = ofToBool(ConfigLoader::singleton()->Value("System", "showSpeciesLegends"));
+    this->legends_toggle = gui->addToggle("Show Species Legends", this->showLegends);
 
     
-    this->showMapLabels = ofToBool(ConfigLoader::singleton()->Value("System", "showMapLabels"));
-    this->map_labels_toggle = gui->addToggle("Show Map Labels", this->showMapLabels);
-    
-    
+        
     this->showExtraDetect = ofToBool(ConfigLoader::singleton()->Value("System", "showExtraDetect"));
     this->extra_detect_toggle = gui->addToggle("Nearby animal hint", this->showExtraDetect);
+    
+    this->showWave = ofToBool(ConfigLoader::singleton()->Value("System", "showWave"));
+    this->wave_toggle = gui->addToggle("Show Wave", this->showWave);
+    
+    ////////////////////////////////////////////////////////////////////
+    gui->addSpacer();
+    gui->addLabel("Map legend layers: ");
+    
+    
+    bool showContinentLabels;
+    ofxUIToggle* continent_labels_toggle;
+    
+    bool showSiteLabels;
+    ofxUIToggle* site_labels_toggle;
+    
+    bool showPinsLabels;
+    ofxUIToggle* pins_labels_toggle;
+    
+    //"Continent Labels", "Tagging Site Labels", "Tagging Site Pins"
+    this->showContinentLabels = ofToBool(ConfigLoader::singleton()->Value("System", "showContinentLabels"));
+    this->continent_labels_toggle = gui->addToggle("Continent Labels", this->showContinentLabels);
+
+    this->showSiteLabels = ofToBool(ConfigLoader::singleton()->Value("System", "showSiteLabels"));
+    this->site_labels_toggle = gui->addToggle("Tagging Site Labels", this->showSiteLabels);
+    
+    this->showPinLabels = ofToBool(ConfigLoader::singleton()->Value("System", "showPinLabels"));
+    this->pins_labels_toggle = gui->addToggle("Tagging Site Pins", this->showPinLabels);
     
     
     /////////////////////////////////////////////////////////////////////
@@ -83,9 +107,9 @@ Dashboard::Dashboard(){
     for(auto name = all_species.begin(); name != all_species.end(); name++){
         
         if( std::find(selected_species.begin(), selected_species.end(), *name) != selected_species.end())
-            gui->addToggle( *name, true);
+            this->species_toggle_map[*name] = this->gui->addToggle( *name, true);
         else
-            gui->addToggle( *name, false);
+            this->species_toggle_map[*name] = this->gui->addToggle( *name, false);
     }
     
     
@@ -144,10 +168,23 @@ void Dashboard::toggleLegends(){
     ConfigLoader::singleton()->setValue("System", "showLegends", ofToString(this->showLegends));
 }
 
-void Dashboard::toggleMapLabels(){
-    this->showMapLabels = !this->showMapLabels;
-    this->map_labels_toggle->setValue(this->showMapLabels);
-    ConfigLoader::singleton()->setValue("System", "showMapLabels", ofToString(this->showMapLabels));
+
+void Dashboard::toggleContinentLabels(){
+    this->showContinentLabels = !this->showContinentLabels;
+    this->continent_labels_toggle->setValue(this->showContinentLabels);
+    ConfigLoader::singleton()->setValue("System", "showContinentLabels", ofToString(this->showContinentLabels));
+}
+
+void Dashboard::toggleSiteLabels(){
+    this->showSiteLabels = !this->showSiteLabels;
+    this->site_labels_toggle->setValue(this->showSiteLabels);
+    ConfigLoader::singleton()->setValue("System", "showSiteLabels", ofToString(this->showSiteLabels));
+}
+
+void Dashboard::togglePinLabels(){
+    this->showPinLabels = !this->showPinLabels;
+    this->pins_labels_toggle->setValue(this->showPinLabels);
+    ConfigLoader::singleton()->setValue("System", "showPinLabels", ofToString(this->showPinLabels));
 }
 
 void Dashboard::toggleSeasonClock(){
@@ -166,6 +203,12 @@ void Dashboard::toggleExtraDetect(){
     this->showExtraDetect = !this->showExtraDetect;
     this->extra_detect_toggle->setValue(this->showExtraDetect);
     ConfigLoader::singleton()->setValue("System", "showExtraDetect", ofToString(this->showExtraDetect));
+}
+
+void Dashboard::toggleWave(){
+    this->showWave = !this->showWave;
+    this->wave_toggle->setValue(this->showWave);
+    ConfigLoader::singleton()->setValue("System", "showWave", ofToString(this->showWave));
 }
 
 Dashboard::~Dashboard(){

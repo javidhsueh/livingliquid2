@@ -6,25 +6,37 @@ screen_height = 1080
 
 # the background map image
 bg_map = map/my_map_blue2.png
-label_layer = map/maplabels.png
+
+continent_label_layer = map/continents_layer.png
+site_layer = map/sites_layer.png
+pin_layer = map/pins_layer.png
 
 
 # the data file path
-data_file = ./tracks/demo.json
+data_file = ./tracks/sort_by_id_nodate_topp_display_with_fake_data.json
+# data_file = ./tracks/demo_one.json
 
+showWave = 1
 
 show_dashboard = 0
 
 is_buoyant_animation = 0
 
-showTimeline = 0
+showTimeline = 1
 showSeasonclock = 0
 
-showLegends = 1
-showMapLabels = 1
-showTaggedDate = 1
+showSpeciesLegends = 0
+
+showContinentLabels = 1
+showSiteLabels = 0
+showPinLabels = 0
+
+
+showTaggedDate = 0
 
 showExtraDetect = 0
+
+
     
 
 # land mask
@@ -47,14 +59,14 @@ max_gap  = 100
 [description]
 
 SalmonShark_title = Salmon Shark
-SalmonShark_desc = Salmon sharks range as far south as\n the Sea of Japan and Alaska during the\n annual salmon run.
+SalmonShark_desc = Salmon sharks range as far south as\nthe Sea of Japan and Alaska during the\nannual salmon run.
 
 BlueWhale_title = Blue Whale
-BlueWhale_desc = Blue sharks are found off the coasts\nof every continent. Its greatest Pacific\nconcentrations occur between 20° and\n50° North but with strong seasonal fluctuations.
+BlueWhale_desc = Blue sharks are found off the coasts\nof every continent. Its greatest Pacific\nconcentrations occur between 20° and\n50° North but with strong seasonal\nfluctuations.
 
 
 ShortfinMakoShark_title = Mako Shark
-ShortfinMakoShark_desc = this is the description of Shortfin Mako Shark
+ShortfinMakoShark_desc = The shortfin mako shark is the fastest\nspecies of shark. Its speed has been recorded\nat 25 mph with bursts of up to 46 mph.\nThis high-leaping fish - they can leap\napproximately 30 ft high or higher in the air\n- is a highly sought-after game fish worldwide.
 
 WhiteShark_title = White Shark
 WhiteShark_desc = this is the description of White Shark
@@ -73,7 +85,7 @@ NorthernElephantSeal_desc = this is the description\nof Northern Elephant Seal
 [speed]
 
 # 6 days per second
-display_speed = 5
+display_speed = 2
 
 [boat]
 
@@ -126,7 +138,7 @@ trail_smoothness =  6
 touch_sensitivity_radius = 25
 
 fadeInTime = 600
-fadeOutTime = 5000
+fadeOutTime = 10000
 
 buoyant_size_offset = 5
 buoyant_interval = 2500
@@ -138,45 +150,140 @@ detected_opacity = 110
 undetected_opacity = 0
 
 
+[tag_icon_offset]
+
+flash_duration = 900
+
+duration = 400
+anim_y_offset = -16
+anim_x_offset = +2
+
+
+SalmonShark_x_left = +2
+SalmonShark_y_left = -24
+SalmonShark_x_right = -21
+SalmonShark_y_right = -24
+SalmonShark_tip_x_left = +18
+SalmonShark_tip_y_left = -25
+SalmonShark_tip_x_right = -16
+SalmonShark_tip_y_right = -25
+
+
+BlueWhale_x_left = -28
+BlueWhale_y_left = -27
+BlueWhale_x_right = -6
+BlueWhale_y_right = -27
+BlueWhale_tip_x_left = -7
+BlueWhale_tip_y_left = -28
+BlueWhale_tip_x_right = 1
+BlueWhale_tip_y_right = -28
+
+
+
+ShortfinMakoShark_x_left = +2
+ShortfinMakoShark_y_left = -24
+ShortfinMakoShark_x_right = -21
+ShortfinMakoShark_y_right = -24
+ShortfinMakoShark_tip_x_left = +18
+ShortfinMakoShark_tip_y_left = -26
+ShortfinMakoShark_tip_x_right = -16
+ShortfinMakoShark_tip_y_right = -26
+
+
+
+WhiteShark_x_left = +2
+WhiteShark_y_left = -23
+WhiteShark_x_right = -21
+WhiteShark_y_right = -23
+
+WhiteShark_tip_x_left = +15
+WhiteShark_tip_y_left = -22
+WhiteShark_tip_x_right = -14
+WhiteShark_tip_y_right = -22
+
+
+LeatherbackSeaTurtle_x_left = -17
+LeatherbackSeaTurtle_y_left = -31
+LeatherbackSeaTurtle_x_right = -9
+LeatherbackSeaTurtle_y_right = -31
+LeatherbackSeaTurtle_tip_x_left = 5
+LeatherbackSeaTurtle_tip_y_left = -32
+LeatherbackSeaTurtle_tip_x_right = -5
+LeatherbackSeaTurtle_tip_y_right = -32
+
+
+LaysanAlbatross_x_left = -10
+LaysanAlbatross_y_left = -17
+LaysanAlbatross_x_right = -13
+LaysanAlbatross_y_right = -17
+LaysanAlbatross_tip_x_left = 4
+LaysanAlbatross_tip_y_left = -18
+LaysanAlbatross_tip_x_right = -11
+LaysanAlbatross_tip_y_right = -18
+
+
+NorthernElephantSeal_x_left = -13
+NorthernElephantSeal_y_left = -17
+NorthernElephantSeal_x_right = -10
+NorthernElephantSeal_y_right = -17
+NorthernElephantSeal_tip_x_left = 1
+NorthernElephantSeal_tip_y_left = -18
+NorthernElephantSeal_tip_x_right = -10
+NorthernElephantSeal_tip_y_right = -18
+
+
+
+[tag_beacon_color]
+
+SalmonShark = #D55202
+BlueWhale = #0D9CD0
+ShortfinMakoShark = #BDB043
+WhiteShark = #9C9C91
+LeatherbackSeaTurtle = #49BB2F
+LaysanAlbatross = #C5C8D2
+NorthernElephantSeal = #EB9C1E
+
+
+
 # the icons for each species
 [icon_file_path]
 
-BowTie = images/bow_tie.png
 Fail = images/fail.png
+tag = images/nina_v3/tag.png
 
-SalmonShark = images/nina_v3/Salmon_Shark/salmon_shark_black.png
-SalmonShark_tagged = images/nina_v3/Salmon_Shark/salmon_shark_tracker.png
-SalmonShark_color = images/nina_v3/Salmon_Shark/salmon_shark_color.png
-
-
-BlueWhale = images/nina_v3/Blue_Whale/blue_whale_black.png
-BlueWhale_tagged = images/nina_v3/Blue_Whale/blue_whale_tracker.png
-BlueWhale_color = images/nina_v3/Blue_Whale/blue_whale_color.png
+SalmonShark = images/nina_v3/Salmon_Shark/black.png
+SalmonShark_color = images/nina_v3/Salmon_Shark/color.png
+SalmonShark_tag = images/nina_v3/Salmon_Shark/tag.png
 
 
-ShortfinMakoShark = images/nina_v3/Mako_Shark/mako_shark_black.png
-ShortfinMakoShark_tagged = images/nina_v3/Mako_Shark/mako_shark_tracker.png
-ShortfinMakoShark_color = images/nina_v3/Mako_Shark/mako_shark_color.png
+BlueWhale = images/nina_v3/Blue_Whale/black.png
+BlueWhale_color = images/nina_v3/Blue_Whale/color.png
+BlueWhale_tag = images/nina_v3/Blue_Whale/tag.png
 
 
-WhiteShark = images/nina_v3/White_Shark/white_shark_black.png
-WhiteShark_tagged = images/nina_v3/White_Shark/white_shark_tracker.png
-WhiteShark_color = images/nina_v3/White_Shark/white_shark_color.png
+ShortfinMakoShark = images/nina_v3/Mako_Shark/black.png
+ShortfinMakoShark_color = images/nina_v3/Mako_Shark/color.png
+ShortfinMakoShark_tag = images/nina_v3/Mako_Shark/tag.png
 
 
-LeatherbackSeaTurtle = images/nina_v3/Leatherback_Sea_Turtle/leatherback_black.png
-LeatherbackSeaTurtle_tagged = images/nina_v3/Leatherback_Sea_Turtle/leatherback_tracker.png
-LeatherbackSeaTurtle_color = images/nina_v3/Leatherback_Sea_Turtle/leatherback_color.png
+WhiteShark = images/nina_v3/White_Shark/black.png
+WhiteShark_color = images/nina_v3/White_Shark/color.png
+WhiteShark_tag = images/nina_v3/White_Shark/tag.png
 
 
-LaysanAlbatross = images/nina_v3/Albatross/albatross_black.png
-LaysanAlbatross_tagged = images/nina_v3/Albatross/albatross_tracker.png
-LaysanAlbatross_color = images/nina_v3/Albatross/albatross_color.png
+LeatherbackSeaTurtle = images/nina_v3/Leatherback_Sea_Turtle/black.png
+LeatherbackSeaTurtle_color = images/nina_v3/Leatherback_Sea_Turtle/color.png
+LeatherbackSeaTurtle_tag = images/nina_v3/Leatherback_Sea_Turtle/tag.png
 
 
-NorthernElephantSeal = images/nina_v3/Elephant_Seal/elephant_seal_black.png
-NorthernElephantSeal_tagged = images/nina_v3/Elephant_Seal/elephant_seal_tracker.png
-NorthernElephantSeal_color = images/nina_v3/Elephant_Seal/elephant_seal_color.png
+LaysanAlbatross = images/nina_v3/Albatross/black.png
+LaysanAlbatross_color = images/nina_v3/Albatross/color.png
+LaysanAlbatross_tag = images/nina_v3/Albatross/tag.png
+
+
+NorthernElephantSeal = images/nina_v3/Elephant_Seal/black.png
+NorthernElephantSeal_color = images/nina_v3/Elephant_Seal/color.png
+NorthernElephantSeal_tag = images/nina_v3/Elephant_Seal/tag.png
 
 
 [Legend]
@@ -204,7 +311,7 @@ season_clock_arrow = images/season_clock/arrow.png
 
 fadeInTime = 500
 fadeOutTime = 500
-max_opacity = 150;
+max_opacity = 225;
 
 title_font = font/babas.ttf
 title_font_size = 15

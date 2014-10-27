@@ -13,7 +13,7 @@
 
 Legend::Legend(){
     
-    this->isShow = ofToBool( ConfigLoader::singleton()->Value("System", "showLegends") );
+    this->isShow = ofToBool( ConfigLoader::singleton()->Value("System", "showSpeciesLegends") );
     
     // create icon map
     std::vector<string> all_species = this->selected_species = DataManager::singleton()->getAllSpecies();

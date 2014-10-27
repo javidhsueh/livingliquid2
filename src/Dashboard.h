@@ -11,7 +11,7 @@
 
 
 #include "ofxUI.h"
-
+#include <map>
 
 class Dashboard {
     
@@ -28,7 +28,12 @@ public:
 
     
     void toggleLegends();
-    void toggleMapLabels();
+    
+    // map layers
+    void toggleContinentLabels();
+    void toggleSiteLabels();
+    void togglePinLabels();
+    
     
     void toggleSeasonClock();
     void toggleTimeline();
@@ -36,17 +41,20 @@ public:
     void toggleTaggedDate();
     void toggleExtraDetect();
     
+    void toggleWave();
+    
     float speed, min_track_days, max_gap;
     
     float fadeInTime, fadeOutTime;
     
-private:
     
     bool isShow;
     
     ofxUIToggle* icon_orientation_none;
     ofxUIToggle* icon_orientation_rotate;
     ofxUIToggle* icon_orientation_flip;
+    
+    std::map<std::string, ofxUIToggle*> species_toggle_map;
     
     bool is_buoyant_animation;
     ofxUIToggle* icon_buoyant_animation;
@@ -67,8 +75,20 @@ private:
     bool showExtraDetect;
     ofxUIToggle* extra_detect_toggle;
     
-    bool showMapLabels;
-    ofxUIToggle* map_labels_toggle;
+    bool showWave;
+    ofxUIToggle* wave_toggle;
+    
+    // map layers:
+    
+    bool showContinentLabels;
+    ofxUIToggle* continent_labels_toggle;
+    
+    bool showSiteLabels;
+    ofxUIToggle* site_labels_toggle;
+    
+    bool showPinLabels;
+    ofxUIToggle* pins_labels_toggle;
+    
     
 };
 

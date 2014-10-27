@@ -180,13 +180,20 @@
 		1CF38D2D197F2461005A3F0E /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1CF38BEA197F218B005A3F0E /* ofxUIWidgetWithLabel.cpp */; };
 		1CF38D2E197F2461005A3F0E /* ofxUIWidgetWithLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 1CF38BEB197F218B005A3F0E /* ofxUIWidgetWithLabel.h */; };
 		1CF38D2F197F2461005A3F0E /* ofxUIWrapper.h in Sources */ = {isa = PBXBuildFile; fileRef = 1CF38BEC197F218B005A3F0E /* ofxUIWrapper.h */; };
-		1CF38DA2197F2559005A3F0E /* config.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1CF38D64197F2553005A3F0E /* config.txt */; };
 		5355e99d8bbc71222aa2b9fd35c7e290 /* ofxFXObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4cf06da01d9a4561a5001b286d7033d5 /* ofxFXObject.cpp */; };
+		692FFFB619F9A42C0096EE87 /* ofxRecorder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 692FFFB419F9A42C0096EE87 /* ofxRecorder.cpp */; };
+		692FFFB719F9A4540096EE87 /* ofxRecorder.h in Sources */ = {isa = PBXBuildFile; fileRef = 692FFFB519F9A42C0096EE87 /* ofxRecorder.h */; };
+		6941308719F8727A000EDDDE /* WavePool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6941308619F8727A000EDDDE /* WavePool.cpp */; };
+		6941308A19F872F5000EDDDE /* Wave.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6941308919F872F5000EDDDE /* Wave.cpp */; };
 		69506F9919B6E4B200E50D80 /* Pen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69506F9819B6E4B200E50D80 /* Pen.cpp */; };
 		69506F9C19B70BA700E50D80 /* ImageResources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69506F9B19B70BA700E50D80 /* ImageResources.cpp */; };
 		6963048219BFA93A00C14861 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6963048119BFA93A00C14861 /* Logger.cpp */; };
 		6981B6BD19A7126800C9CB6A /* Legend.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6981B6BC19A7126800C9CB6A /* Legend.cpp */; };
 		6981B6C019A7537000C9CB6A /* SeasonClock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6981B6BF19A7537000C9CB6A /* SeasonClock.cpp */; };
+		69A9EB2C19F96F630074C0EB /* ofxGif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69A9EAD119F96F3B0074C0EB /* ofxGif.cpp */; };
+		69A9EB2D19F96F630074C0EB /* ofxGif.h in Sources */ = {isa = PBXBuildFile; fileRef = 69A9EAD219F96F3B0074C0EB /* ofxGif.h */; };
+		69BECA0E19FA0ECF00C51C06 /* TrackBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69BECA0D19FA0ECF00C51C06 /* TrackBrowser.cpp */; };
+		69FFC78619E9AE6A00358ED6 /* Tag.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69FFC78519E9AE6A00358ED6 /* Tag.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -381,7 +388,6 @@
 			dstSubfolderSpec = 6;
 			files = (
 				1C52031419B69C2B003A4441 /* config_debug.txt in CopyFiles */,
-				1CF38DA2197F2559005A3F0E /* config.txt in CopyFiles */,
 				BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1033,11 +1039,7 @@
 		1CF38D4C197F24C3005A3F0E /* OscTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OscTypes.h; sourceTree = "<group>"; };
 		1CF38D4D197F24C3005A3F0E /* readme */ = {isa = PBXFileReference; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
 		1CF38D4E197F24C3005A3F0E /* todo */ = {isa = PBXFileReference; lastKnownFileType = text; path = todo; sourceTree = "<group>"; };
-		1CF38D64197F2553005A3F0E /* config.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
 		1CF38D67197F2553005A3F0E /* Sansation_Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sansation_Light.ttf; sourceTree = "<group>"; };
-		1CF38D68197F2553005A3F0E /* Sansation_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sansation_Regular.ttf; sourceTree = "<group>"; };
-		1CF38D69197F2553005A3F0E /* Santander.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Santander.ttf; sourceTree = "<group>"; };
-		1CF38D6B197F2553005A3F0E /* _bg_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = _bg_map.png; sourceTree = "<group>"; };
 		1CF38D6D197F2553005A3F0E /* albacore_tuna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albacore_tuna.png; sourceTree = "<group>"; };
 		1CF38D6E197F2553005A3F0E /* albatross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = albatross.png; sourceTree = "<group>"; };
 		1CF38D6F197F2553005A3F0E /* atlantic_bluefin_tuna.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = atlantic_bluefin_tuna.png; sourceTree = "<group>"; };
@@ -1066,24 +1068,7 @@
 		1CF38D86197F2553005A3F0E /* swordfish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swordfish.png; sourceTree = "<group>"; };
 		1CF38D87197F2553005A3F0E /* thresher_shark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thresher_shark.png; sourceTree = "<group>"; };
 		1CF38D88197F2553005A3F0E /* whale_shark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whale_shark.png; sourceTree = "<group>"; };
-		1CF38D89197F2553005A3F0E /* bg_map.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_map.png; sourceTree = "<group>"; };
 		1CF38D8A197F2553005A3F0E /* boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boat.png; sourceTree = "<group>"; };
-		1CF38D8C197F2553005A3F0E /* 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0.png; sourceTree = "<group>"; };
-		1CF38D8D197F2553005A3F0E /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		1CF38D8E197F2553005A3F0E /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
-		1CF38D8F197F2553005A3F0E /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
-		1CF38D90197F2553005A3F0E /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
-		1CF38D91197F2553005A3F0E /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
-		1CF38D92197F2553005A3F0E /* detected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = detected.png; sourceTree = "<group>"; };
-		1CF38D94197F2553005A3F0E /* albatross.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = albatross.bmp; sourceTree = "<group>"; };
-		1CF38D95197F2553005A3F0E /* eseal.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = eseal.bmp; sourceTree = "<group>"; };
-		1CF38D96197F2553005A3F0E /* shark.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = shark.bmp; sourceTree = "<group>"; };
-		1CF38D97197F2553005A3F0E /* squid.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = squid.bmp; sourceTree = "<group>"; };
-		1CF38D98197F2553005A3F0E /* tuna.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tuna.bmp; sourceTree = "<group>"; };
-		1CF38D99197F2553005A3F0E /* turtle.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = turtle.bmp; sourceTree = "<group>"; };
-		1CF38D9A197F2553005A3F0E /* whale.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = whale.bmp; sourceTree = "<group>"; };
-		1CF38D9B197F2553005A3F0E /* labels.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = labels.txt; sourceTree = "<group>"; };
-		1CF38DA1197F2553005A3F0E /* topp.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = topp.json; sourceTree = "<group>"; };
 		1a2ed38d79eb9cc8b3e113e4e2912496 /* ofxInverse.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxInverse.h; path = ../../../addons/ofxFX/src/filters/ofxInverse.h; sourceTree = SOURCE_ROOT; };
 		200f5df5e39cfecd07dad5c7eeb4f5d3 /* ofxContrast.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxContrast.h; path = ../../../addons/ofxFX/src/filters/ofxContrast.h; sourceTree = SOURCE_ROOT; };
 		22d82b140684245a264395b86480b0c7 /* ofxBlur.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBlur.h; path = ../../../addons/ofxFX/src/filters/ofxBlur.h; sourceTree = SOURCE_ROOT; };
@@ -1094,6 +1079,12 @@
 		5e5ead88df0323d1c610940882003743 /* ofxOldTv.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOldTv.h; path = ../../../addons/ofxFX/src/filters/ofxOldTv.h; sourceTree = SOURCE_ROOT; };
 		62bdb9f397d0ab08dd41e769d600f76e /* ofxGrayScott.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGrayScott.h; path = ../../../addons/ofxFX/src/generative/ofxGrayScott.h; sourceTree = SOURCE_ROOT; };
 		63cd29b9755446a11d1068b505b23e74 /* ofxMask.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMask.h; path = ../../../addons/ofxFX/src/composers/ofxMask.h; sourceTree = SOURCE_ROOT; };
+		692FFFB419F9A42C0096EE87 /* ofxRecorder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxRecorder.cpp; sourceTree = "<group>"; };
+		692FFFB519F9A42C0096EE87 /* ofxRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxRecorder.h; sourceTree = "<group>"; };
+		6941308519F8726D000EDDDE /* WavePool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavePool.h; sourceTree = "<group>"; };
+		6941308619F8727A000EDDDE /* WavePool.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavePool.cpp; sourceTree = "<group>"; };
+		6941308819F872EC000EDDDE /* Wave.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Wave.h; sourceTree = "<group>"; };
+		6941308919F872F5000EDDDE /* Wave.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Wave.cpp; sourceTree = "<group>"; };
 		69506F8219B6E4A100E50D80 /* Pen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pen.h; sourceTree = "<group>"; };
 		69506F9819B6E4B200E50D80 /* Pen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pen.cpp; sourceTree = "<group>"; };
 		69506F9A19B70B9200E50D80 /* ImageResources.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageResources.h; sourceTree = "<group>"; };
@@ -1104,6 +1095,20 @@
 		6981B6BC19A7126800C9CB6A /* Legend.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Legend.cpp; sourceTree = "<group>"; };
 		6981B6BE19A7536800C9CB6A /* SeasonClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeasonClock.h; sourceTree = "<group>"; };
 		6981B6BF19A7537000C9CB6A /* SeasonClock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SeasonClock.cpp; sourceTree = "<group>"; };
+		69A9EAC619F96F3B0074C0EB /* .gitattributes */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		69A9EAC719F96F3B0074C0EB /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		69A9EAC919F96F3B0074C0EB /* ofApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
+		69A9EACA19F96F3B0074C0EB /* ofApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
+		69A9EACC19F96F3B0074C0EB /* ofApp.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
+		69A9EACD19F96F3B0074C0EB /* ofApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
+		69A9EACE19F96F3B0074C0EB /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		69A9EACF19F96F3B0074C0EB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		69A9EAD119F96F3B0074C0EB /* ofxGif.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxGif.cpp; sourceTree = "<group>"; };
+		69A9EAD219F96F3B0074C0EB /* ofxGif.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxGif.h; sourceTree = "<group>"; };
+		69BECA0C19FA0EB500C51C06 /* TrackBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrackBrowser.h; sourceTree = "<group>"; };
+		69BECA0D19FA0ECF00C51C06 /* TrackBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrackBrowser.cpp; sourceTree = "<group>"; };
+		69FFC76F19E9AE5E00358ED6 /* Tag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		69FFC78519E9AE6A00358ED6 /* Tag.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tag.cpp; sourceTree = "<group>"; };
 		6c3bf497c4422fa343f951a29d3d77a0 /* ofxMedian.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxMedian.h; path = ../../../addons/ofxFX/src/filters/ofxMedian.h; sourceTree = SOURCE_ROOT; };
 		782d44f4d5e4c1fd710c37166d1c6767 /* ofxRipples.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxRipples.h; path = ../../../addons/ofxFX/src/operations/ofxRipples.h; sourceTree = SOURCE_ROOT; };
 		7a6afa6914a5b7479fb247b68d72b4c3 /* ofxClone.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxClone.h; path = ../../../addons/ofxFX/src/composers/ofxClone.h; sourceTree = SOURCE_ROOT; };
@@ -2963,10 +2968,8 @@
 			isa = PBXGroup;
 			children = (
 				1C5202FE19B69884003A4441 /* config_debug.txt */,
-				1CF38D64197F2553005A3F0E /* config.txt */,
 				1CF38D66197F2553005A3F0E /* font */,
 				1CF38D6A197F2553005A3F0E /* images */,
-				1CF38D9B197F2553005A3F0E /* labels.txt */,
 				1CF38D9C197F2553005A3F0E /* tracks */,
 			);
 			name = data;
@@ -2977,8 +2980,6 @@
 			isa = PBXGroup;
 			children = (
 				1CF38D67197F2553005A3F0E /* Sansation_Light.ttf */,
-				1CF38D68197F2553005A3F0E /* Sansation_Regular.ttf */,
-				1CF38D69197F2553005A3F0E /* Santander.ttf */,
 			);
 			path = font;
 			sourceTree = "<group>";
@@ -2986,12 +2987,8 @@
 		1CF38D6A197F2553005A3F0E /* images */ = {
 			isa = PBXGroup;
 			children = (
-				1CF38D6B197F2553005A3F0E /* _bg_map.png */,
 				1CF38D6C197F2553005A3F0E /* animal_icons */,
-				1CF38D89197F2553005A3F0E /* bg_map.png */,
 				1CF38D8A197F2553005A3F0E /* boat.png */,
-				1CF38D8B197F2553005A3F0E /* icons */,
-				1CF38D93197F2553005A3F0E /* silhouette icons */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -3031,39 +3028,10 @@
 			path = animal_icons;
 			sourceTree = "<group>";
 		};
-		1CF38D8B197F2553005A3F0E /* icons */ = {
-			isa = PBXGroup;
-			children = (
-				1CF38D8C197F2553005A3F0E /* 0.png */,
-				1CF38D8D197F2553005A3F0E /* 1.png */,
-				1CF38D8E197F2553005A3F0E /* 2.png */,
-				1CF38D8F197F2553005A3F0E /* 3.png */,
-				1CF38D90197F2553005A3F0E /* 4.png */,
-				1CF38D91197F2553005A3F0E /* 5.png */,
-				1CF38D92197F2553005A3F0E /* detected.png */,
-			);
-			path = icons;
-			sourceTree = "<group>";
-		};
-		1CF38D93197F2553005A3F0E /* silhouette icons */ = {
-			isa = PBXGroup;
-			children = (
-				1CF38D94197F2553005A3F0E /* albatross.bmp */,
-				1CF38D95197F2553005A3F0E /* eseal.bmp */,
-				1CF38D96197F2553005A3F0E /* shark.bmp */,
-				1CF38D97197F2553005A3F0E /* squid.bmp */,
-				1CF38D98197F2553005A3F0E /* tuna.bmp */,
-				1CF38D99197F2553005A3F0E /* turtle.bmp */,
-				1CF38D9A197F2553005A3F0E /* whale.bmp */,
-			);
-			path = "silhouette icons";
-			sourceTree = "<group>";
-		};
 		1CF38D9C197F2553005A3F0E /* tracks */ = {
 			isa = PBXGroup;
 			children = (
 				1C8117B7199557F30090B08B /* sort_by_id_nodate_topp_display_lerp_36.json */,
-				1CF38DA1197F2553005A3F0E /* topp.json */,
 			);
 			path = tracks;
 			sourceTree = "<group>";
@@ -3113,9 +3081,52 @@
 			name = operations;
 			sourceTree = "<group>";
 		};
+		69A9EAC519F96F3B0074C0EB /* ofxGif */ = {
+			isa = PBXGroup;
+			children = (
+				69A9EAC619F96F3B0074C0EB /* .gitattributes */,
+				69A9EAC719F96F3B0074C0EB /* .gitignore */,
+				69A9EAC819F96F3B0074C0EB /* example_load */,
+				69A9EACB19F96F3B0074C0EB /* example_save */,
+				69A9EACE19F96F3B0074C0EB /* ofxaddons_thumbnail.png */,
+				69A9EACF19F96F3B0074C0EB /* README.md */,
+				69A9EAD019F96F3B0074C0EB /* src */,
+			);
+			name = ofxGif;
+			path = ../../../addons/ofxGif;
+			sourceTree = "<group>";
+		};
+		69A9EAC819F96F3B0074C0EB /* example_load */ = {
+			isa = PBXGroup;
+			children = (
+				69A9EAC919F96F3B0074C0EB /* ofApp.cpp */,
+				69A9EACA19F96F3B0074C0EB /* ofApp.h */,
+			);
+			path = example_load;
+			sourceTree = "<group>";
+		};
+		69A9EACB19F96F3B0074C0EB /* example_save */ = {
+			isa = PBXGroup;
+			children = (
+				69A9EACC19F96F3B0074C0EB /* ofApp.cpp */,
+				69A9EACD19F96F3B0074C0EB /* ofApp.h */,
+			);
+			path = example_save;
+			sourceTree = "<group>";
+		};
+		69A9EAD019F96F3B0074C0EB /* src */ = {
+			isa = PBXGroup;
+			children = (
+				69A9EAD119F96F3B0074C0EB /* ofxGif.cpp */,
+				69A9EAD219F96F3B0074C0EB /* ofxGif.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				69A9EAC519F96F3B0074C0EB /* ofxGif */,
 				1C8B829D198C624F000B9E29 /* ofxProgressBar */,
 				1CBE1EC91989CE1400B94CF5 /* ofxMouseAutoHider */,
 				1CF38C93197F2387005A3F0E /* ofxOsc */,
@@ -3237,6 +3248,16 @@
 				69506F9B19B70BA700E50D80 /* ImageResources.cpp */,
 				6963046B19BFA92E00C14861 /* Logger.h */,
 				6963048119BFA93A00C14861 /* Logger.cpp */,
+				69FFC76F19E9AE5E00358ED6 /* Tag.h */,
+				69FFC78519E9AE6A00358ED6 /* Tag.cpp */,
+				6941308519F8726D000EDDDE /* WavePool.h */,
+				6941308619F8727A000EDDDE /* WavePool.cpp */,
+				6941308819F872EC000EDDDE /* Wave.h */,
+				6941308919F872F5000EDDDE /* Wave.cpp */,
+				692FFFB419F9A42C0096EE87 /* ofxRecorder.cpp */,
+				692FFFB519F9A42C0096EE87 /* ofxRecorder.h */,
+				69BECA0C19FA0EB500C51C06 /* TrackBrowser.h */,
+				69BECA0D19FA0ECF00C51C06 /* TrackBrowser.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -3597,6 +3618,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				692FFFB719F9A4540096EE87 /* ofxRecorder.h in Sources */,
+				69A9EB2C19F96F630074C0EB /* ofxGif.cpp in Sources */,
+				69A9EB2D19F96F630074C0EB /* ofxGif.h in Sources */,
 				1CC9A8DE19BE203800AE6883 /* IpEndpointName.cpp in Sources */,
 				1CC9A8DF19BE203800AE6883 /* IpEndpointName.h in Sources */,
 				1CC9A8E019BE203800AE6883 /* NetworkingUtils.h in Sources */,
@@ -3627,6 +3651,7 @@
 				1CF38CD5197F2461005A3F0E /* ofxUI2DPad.cpp in Sources */,
 				1CF38CD6197F2461005A3F0E /* ofxUI2DPad.h in Sources */,
 				1CF38CD7197F2461005A3F0E /* ofxUIBaseDraws.cpp in Sources */,
+				69FFC78619E9AE6A00358ED6 /* Tag.cpp in Sources */,
 				1CF38CD8197F2461005A3F0E /* ofxUIBaseDraws.h in Sources */,
 				1CF38CD9197F2461005A3F0E /* ofxUIBiLabelSlider.cpp in Sources */,
 				1CF38CDA197F2461005A3F0E /* ofxUIBiLabelSlider.h in Sources */,
@@ -3665,6 +3690,7 @@
 				1CF38CF8197F2461005A3F0E /* ofxUILabelButton.cpp in Sources */,
 				1CF38CF9197F2461005A3F0E /* ofxUILabelButton.h in Sources */,
 				1CF38CFA197F2461005A3F0E /* ofxUILabelToggle.cpp in Sources */,
+				692FFFB619F9A42C0096EE87 /* ofxRecorder.cpp in Sources */,
 				1CF38CFB197F2461005A3F0E /* ofxUILabelToggle.h in Sources */,
 				1CF38CFC197F2461005A3F0E /* ofxUIMinimalSlider.cpp in Sources */,
 				1CF38CFD197F2461005A3F0E /* ofxUIMinimalSlider.h in Sources */,
@@ -3726,6 +3752,7 @@
 				1C402B2C19AE76FC00E86C1E /* AnimalPopout.cpp in Sources */,
 				1CF38CC7197F23AA005A3F0E /* ofxOscArg.h in Sources */,
 				1CF38CC8197F23AA005A3F0E /* ofxOscBundle.cpp in Sources */,
+				69BECA0E19FA0ECF00C51C06 /* TrackBrowser.cpp in Sources */,
 				1CF38CC9197F23AA005A3F0E /* ofxOscBundle.h in Sources */,
 				1CF38CCA197F23AA005A3F0E /* ofxOscMessage.cpp in Sources */,
 				1CF38CCB197F23AA005A3F0E /* ofxOscMessage.h in Sources */,
@@ -3761,11 +3788,13 @@
 				1CF38C5D197F2216005A3F0E /* json_value.cpp in Sources */,
 				1CF38C5E197F2216005A3F0E /* json_valueiterator.inl in Sources */,
 				1CF38C5F197F2216005A3F0E /* json_writer.cpp in Sources */,
+				6941308A19F872F5000EDDDE /* Wave.cpp in Sources */,
 				1CF38C60197F2216005A3F0E /* sconscript in Sources */,
 				1CF38C61197F2216005A3F0E /* ofxJSONElement.cpp in Sources */,
 				1CF38C62197F2216005A3F0E /* ofxJSONElement.h in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				1CF3898A197F203F005A3F0E /* LabelLoader.cpp in Sources */,
+				6941308719F8727A000EDDDE /* WavePool.cpp in Sources */,
 				1CF38986197F203F005A3F0E /* DataManager.cpp in Sources */,
 				1CF38989197F203F005A3F0E /* InfoTab.cpp in Sources */,
 				1CF38987197F203F005A3F0E /* FingerTouch.cpp in Sources */,
@@ -3891,6 +3920,7 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -3957,8 +3987,10 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				SDKROOT = macosx10.9;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -3977,6 +4009,7 @@
 				GCC_MODEL_TUNING = NONE;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Carbon.framework/Headers/Carbon.h";
+				GCC_VERSION = "";
 				INFOPLIST_FILE = "openFrameworks-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -4043,8 +4076,10 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PREBINDING = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx10.9;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

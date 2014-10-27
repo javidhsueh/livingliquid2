@@ -61,8 +61,19 @@ ConfigLoader::ConfigLoader() {
         name  = trim(line.substr(0,posEqual));
         value = trim(line.substr(posEqual+1));
         
+        for(int i = 0 ; i < value.length(); i++){
+            if(i > 0 && i+1 < value.length() ){
+                if(value[i] == '\\' && value[i+1] == 'n' ){
+                    value[i] = '\n';
+                    value[i+1] = ' ';
+                    i ++;
+                }
+            }
+        }
+        
         content_[inSection+'/'+name]=value;
     }
+//    ofLog(OF_LOG_ERROR, "showWave = "+ConfigLoader::singleton()->Value("System", "showWave"));
 }
 
 string const& ConfigLoader::Value(std::string const& section, std::string const& entry) const {

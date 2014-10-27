@@ -8,12 +8,14 @@
 
 #include "FingerTouch.h"
 #include "ConfigLoader.h"
+#include "Logger.h"
 
 FingerTouch::FingerTouch(int tid, ofPoint p)
     :TouchElement(tid,p)
 {
     this->radius = ofToInt(ConfigLoader::singleton()->Value("RenderTrackParameters", "touch_sensitivity_radius"));
     this->squaredRadius = (this->radius) * (this->radius);
+//    Logger::singleton()->log("EVENT: touch:"+ofToString(tid) +", at:"+ofToString(p));
 }
 
 FingerTouch::~FingerTouch(){}

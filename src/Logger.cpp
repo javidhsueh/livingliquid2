@@ -20,13 +20,21 @@ Logger* Logger::singleton(){
 
 Logger::Logger() {
     
-//    ofLogToFile("./log_"+Util::currentDateTime()+".txt", true);
+	ofLogToFile("log_"+Util::currentDateTime()+".txt", true);
+//	ofLogToFile("log.txt", true);
 }
 
 void Logger::log(std::string type, std::string msg){
     // encode message
     std::string encoded_message =  Util::currentDateTime()+"@"+msg;
     ofLogVerbose(type, encoded_message);
+}
+
+void Logger::log(std::string msg){
+    // encode message
+    std::string encoded_message =  Util::currentDateTime()+"@"+msg;
+//    ofLogVerbose("Record", encoded_message);
+    ofLog(OF_LOG_SILENT, encoded_message);
 }
 
 

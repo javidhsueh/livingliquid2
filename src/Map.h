@@ -22,6 +22,7 @@
 #include "ofxRipples.h"
 #include "ofxBounce.h"
 #include <map>
+#include "WavePool.h"
 
 //#include "ofxProgressBar.h"
 
@@ -49,7 +50,10 @@ public:
     void toggleBuoyantAnimation();
     void toggleTimeline();
     
-    void toggleLabelLayer();
+    // toggle layers
+    void toggleContinentLabelLayer();
+    void toggleSiteLabelLayer();
+    void togglePinLabelLayer();
     
     void toggleShowTaggedDate();
     void toggleShowExtraDetect();
@@ -73,7 +77,19 @@ private:
     
     // background image
     ofImage bg_map;
-    ofImage label_layer;
+
+    // lable layers
+    ofImage continent_label_layer;
+    ofImage site_label_layer;
+    ofImage pin_label_layer;
+    
+    bool isShowContinentLabel;
+    bool isShowSiteLabel;
+    bool isShowPinLabel;
+    
+    
+    
+    
     bool land_mask[1920][1080];
     
     std::map<int, ofImage> sst_maps;
@@ -95,7 +111,7 @@ private:
     bool isDebug;
     int current_day;
     
-    bool isShowLabel;
+
 
     // mouse mode
     Boat* mouseboat;
@@ -116,6 +132,10 @@ private:
     ofxRipples  rip;
     ofxBounce   bounce;
     ofTrueTypeFont textfont;
+    
+    //random wave frequency
+    int wave_freq;
+    
 };
 
 #endif
